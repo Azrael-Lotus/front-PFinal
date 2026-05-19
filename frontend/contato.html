@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - Universo dos Livros</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style_shared.css">
+  <style>
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media(max-width: 750px) {
+      .contato-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-box, .form-box {
+      background: #3a3a3a;
+      border-radius: 20px;
+      padding: 36px;
+      border: 1px solid #555;
+    }
+
+    .info-box h2, .form-box h2 {
+      font-family: 'Cinzel', serif;
+      color: #ffb37a;
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+    .info-item .icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .info-item strong { display: block; color: #ffb37a; margin-bottom: 4px; }
+    .info-item span, .info-item a { color: #ccc; text-decoration: none; font-size: 0.95rem; }
+    .info-item a:hover { color: #ff9d57; }
+
+    .form-field { margin-bottom: 18px; }
+    .form-field label { display: block; color: #ccc; font-size: 0.88rem; margin-bottom: 6px; }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid #555;
+      border-radius: 12px;
+      background: #2b2b2b;
+      color: #fff;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: #ff8c42;
+      box-shadow: 0 0 0 3px rgba(255,140,66,0.15);
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: #777; }
+    .form-field textarea { resize: vertical; min-height: 130px; }
+    .form-field select option { background: #2b2b2b; }
+
+    .btn-enviar {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #ff8c42, #ff6b00);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Lato', sans-serif;
+    }
+    .btn-enviar:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    .msg-form {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      min-height: 20px;
+      color: #7ddf7d;
+    }
+    .msg-form.erro { color: #ff9d57; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">📚 Universo dos Livros</a>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="livros.html">Livros</a>
+      <a href="categorias.html">Categorias</a>
+      <a href="contato.html" class="active">Contato</a>
+      <a href="carrinho.html">🛒 Carrinho</a>
+    </nav>
+    <div class="auth-bar">
+      <button id="btn-login" class="btn">Entrar</button>
+      <button id="btn-register" class="btn btn-outline">Cadastrar</button>
+      <div id="user-bar">
+        <span id="user-name"></span>
+        <button id="btn-logout">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <h2 id="modal-title">Entrar</h2>
+      <div id="field-name" style="display:none">
+        <input type="text" id="input-name" placeholder="Seu nome" />
+      </div>
+      <input type="email" id="input-email" placeholder="E-mail" />
+      <input type="password" id="input-password" placeholder="Senha" />
+      <button class="btn-full" id="modal-submit">Entrar</button>
+      <p class="modal-msg" id="modal-msg"></p>
+      <p class="modal-switch" id="modal-switch-text">
+        Não tem conta? <a onclick="openModal('register')">Cadastre-se</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <h1>📬 Contato</h1>
+    <p>Entre em contato com a nossa equipe</p>
+  </div>
+
+  <section class="books">
+    <div class="contato-grid">
+      <!-- Informações -->
+      <div class="info-box">
+        <h2>Fale Conosco</h2>
+        <p style="color:#ccc; margin-bottom:24px; line-height:1.7;">Tem dúvidas, sugestões ou precisa de ajuda? Entre em contato pelos canais abaixo ou use o formulário.</p>
+
+        <div class="info-item">
+          <span class="icon">📧</span>
+          <div>
+            <strong>E-mail</strong>
+            <a href="mailto:contato@universodoslivros.com">contato@universodoslivros.com</a>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="icon">📞</span>
+          <div>
+            <strong>Telefone</strong>
+            <span>(11) 1234-5678</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <div>
+            <strong>Endereço</strong>
+            <span>Rua dos Livros, 123 — São Paulo, SP</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="icon">🕐</span>
+          <div>
+            <strong>Horário de Atendimento</strong>
+            <span>Segunda a Sexta, das 9h às 18h</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <div class="form-box">
+        <h2>Enviar Mensagem</h2>
+
+        <div class="form-field">
+          <label>Nome completo</label>
+          <input type="text" id="ct-nome" placeholder="Seu nome" />
+        </div>
+        <div class="form-field">
+          <label>E-mail</label>
+          <input type="email" id="ct-email" placeholder="seu@email.com" />
+        </div>
+        <div class="form-field">
+          <label>Assunto</label>
+          <select id="ct-assunto">
+            <option value="">Selecione um assunto...</option>
+            <option>Dúvida sobre pedido</option>
+            <option>Sugestão de livro</option>
+            <option>Problema no site</option>
+            <option>Parceria</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Mensagem</label>
+          <textarea id="ct-mensagem" placeholder="Escreva sua mensagem aqui..."></textarea>
+        </div>
+
+        <button class="btn-enviar" onclick="enviarMensagem()">Enviar Mensagem ✉️</button>
+        <p class="msg-form" id="msg-form"></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h3>📚 Universo dos Livros</h3>
+    <p>Seu portal para aventuras literárias inesquecíveis.</p>
+  </footer>
+
+<script>
+const modalOverlay = document.getElementById('modal-overlay');
+const btnLogin = document.getElementById('btn-login');
+const btnRegister = document.getElementById('btn-register');
+const modalClose = document.getElementById('modal-close');
+const modalTitle = document.getElementById('modal-title');
+const fieldName = document.getElementById('field-name');
+const modalSubmit = document.getElementById('modal-submit');
+const modalSwitchText = document.getElementById('modal-switch-text');
+const modalMsg = document.getElementById('modal-msg');
+const userBar = document.getElementById('user-bar');
+const userNameSpan = document.getElementById('user-name');
+const btnLogout = document.getElementById('btn-logout');
+
+function checkLogin(){
+  const u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+  if(u){
+    btnLogin.style.display='none';
+    btnRegister.style.display='none';
+    userBar.style.display='flex';
+    userNameSpan.textContent = '👤 ' + u.nome;
+  }
+}
+function openModal(type){
+  modalOverlay.style.display='flex';
+  modalMsg.textContent='';
+  if(type==='register'){
+    modalTitle.innerText='Cadastrar';
+    fieldName.style.display='block';
+    modalSubmit.innerText='Cadastrar';
+    modalSwitchText.innerHTML=`Já possui conta? <a onclick="openModal('login')">Entrar</a>`;
+  } else {
+    modalTitle.innerText='Entrar';
+    fieldName.style.display='none';
+    modalSubmit.innerText='Entrar';
+    modalSwitchText.innerHTML=`Não tem conta? <a onclick="openModal('register')">Cadastre-se</a>`;
+  }
+}
+btnLogin.addEventListener('click',()=>openModal('login'));
+btnRegister.addEventListener('click',()=>openModal('register'));
+modalClose.addEventListener('click',()=>{modalOverlay.style.display='none';});
+window.addEventListener('click',(e)=>{if(e.target===modalOverlay)modalOverlay.style.display='none';});
+btnLogout.addEventListener('click',()=>{ localStorage.removeItem('usuarioLogado'); location.reload(); });
+modalSubmit.addEventListener('click',()=>{
+  const email = document.getElementById('input-email').value.trim();
+  const senha = document.getElementById('input-password').value;
+  if(modalTitle.innerText==='Cadastrar'){
+    const nome = document.getElementById('input-name').value.trim();
+    if(!nome||!email||!senha){modalMsg.textContent='Preencha todos os campos.';return;}
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')||'[]');
+    if(usuarios.find(u=>u.email===email)){modalMsg.textContent='E-mail já cadastrado.';return;}
+    usuarios.push({nome,email,senha});
+    localStorage.setItem('usuarios',JSON.stringify(usuarios));
+    localStorage.setItem('usuarioLogado',JSON.stringify({nome,email}));
+    modalOverlay.style.display='none'; checkLogin();
+  } else {
+    if(!email||!senha){modalMsg.textContent='Preencha todos os campos.';return;}
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')||'[]');
+    const u = usuarios.find(u=>u.email===email&&u.senha===senha);
+    if(!u){modalMsg.textContent='E-mail ou senha incorretos.';return;}
+    localStorage.setItem('usuarioLogado',JSON.stringify({nome:u.nome,email:u.email}));
+    modalOverlay.style.display='none'; checkLogin();
+  }
+});
+
+function enviarMensagem(){
+  const nome = document.getElementById('ct-nome').value.trim();
+  const email = document.getElementById('ct-email').value.trim();
+  const assunto = document.getElementById('ct-assunto').value;
+  const mensagem = document.getElementById('ct-mensagem').value.trim();
+  const msgEl = document.getElementById('msg-form');
+
+  if(!nome || !email || !assunto || !mensagem){
+    msgEl.textContent = 'Por favor, preencha todos os campos.';
+    msgEl.className = 'msg-form erro';
+    return;
+  }
+
+  // Simula envio e limpa o formulário
+  msgEl.textContent = '✅ Mensagem enviada com sucesso! Responderemos em breve.';
+  msgEl.className = 'msg-form';
+  document.getElementById('ct-nome').value = '';
+  document.getElementById('ct-email').value = '';
+  document.getElementById('ct-assunto').value = '';
+  document.getElementById('ct-mensagem').value = '';
+  setTimeout(()=>{ msgEl.textContent = ''; }, 5000);
+}
+
+checkLogin();
+</script>
+</body>
+</html>
